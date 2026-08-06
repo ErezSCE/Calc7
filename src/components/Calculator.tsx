@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { evaluateExpression } from '../utils/evaluator';
 import styles from './Calculator.module.css';
 
 /**
@@ -18,14 +19,11 @@ const Calculator: React.FC = () => {
     setError(null);
   };
 
-  const evaluateExpression = (expr: string): number => {
-    // Simple safe evaluation using Function constructor.
-    // This is limited to arithmetic operators and parentheses.
-    // eslint-disable-next-line no-new-func
-    const fn = new Function(`"use strict"; return (${expr});`);
-    // The Function will throw if syntax is invalid.
-    return fn();
-  };
+  // Use the safe evaluator from utils.
+  // This parses the expression into an AST and evaluates it, handling errors such as division by zero.
+  // The function may throw SyntaxError for parsing issues or Error for runtime problems.
+  // Import is resolved below.
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
