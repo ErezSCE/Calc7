@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { validateExpression } from '../services/validation';
 import styles from './Calculator.module.css';
 
 /**
@@ -29,6 +30,12 @@ const Calculator: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // First, run validation utility
+    const validationError = validateExpression(expression);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
     try {
       // Basic validation: allow digits, operators, parentheses, decimal point, whitespace.
       if (!/^[0-9+\-*/().\s]+$/.test(expression)) {
