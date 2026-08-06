@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import cssModules from 'vite-plugin-css-modules';
+// CSS Modules plugin removed as it's not required
 
 export default defineConfig({
-  plugins: [react(), cssModules()],
+  plugins: [react()],
   server: {
     port: 3000,
   },
